@@ -48,3 +48,7 @@ loguru>=0.7
 
 # Testing
 pytest>=8.3
+
+# Tutorial notebook (optional; only needed to run tutorial/ISS_Tutorial.ipynb)
+jupyter>=1.0
+nbconvert>=7.16

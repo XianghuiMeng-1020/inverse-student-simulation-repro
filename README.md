@@ -75,10 +75,11 @@ from public data.
   substitution, paired Wilcoxon tests, and effect sizes.
 - **Reproducible statistics** — dialogue-level aggregation, paired
   significance testing, and bootstrap confidence intervals throughout.
-- **Two ways in**: a five-minute, dependency-light [`tutorial/`](tutorial/)
-  that exercises the real schema/metric code on toy data with no GPU or API
-  key, and the full [`scripts/`](scripts/) pipeline for the actual MathDial
-  experiments.
+- **Two ways in**: a five-minute, dependency-light
+  [narrated notebook](tutorial/ISS_Tutorial.ipynb) (plus equivalent plain
+  scripts) that exercises the real schema/metric code on toy data with no
+  GPU or API key, and the full [`scripts/`](scripts/) pipeline for the
+  actual MathDial experiments.
 
 ---
 
@@ -135,8 +136,9 @@ from public data.
 │   └── generate_paper_tables.py, sanity_check_results.py          <- table generation, sanity checks
 │
 ├── tutorial/                   5-minute, no-GPU/no-API walkthrough (see tutorial/README.md)
+│   ├── ISS_Tutorial.ipynb         narrated notebook version (recommended first stop)
 │   ├── 01_inspect_schema.py, 02_construct_states.py,
-│   │   03_evaluate_kc_recovery.py, 04_misconception_ranking.py
+│   │   03_evaluate_kc_recovery.py, 04_misconception_ranking.py    <- equivalent plain scripts
 │   └── toy_dialogues.json         3 synthetic tutoring dialogues (not MathDial)
 │
 ├── tests/                      pytest unit tests for src/iss (schema, metrics, splits, ...)
@@ -242,7 +244,13 @@ Random-Z construction, no LLM call).
 ## 🚀 Quick Start
 
 If you just want to see the pipeline work end-to-end without a GPU or API
-key, start with the tutorial:
+key, start with the tutorial notebook:
+
+```bash
+jupyter notebook tutorial/ISS_Tutorial.ipynb
+```
+
+or, equivalently, the plain scripts:
 
 ```bash
 cd tutorial

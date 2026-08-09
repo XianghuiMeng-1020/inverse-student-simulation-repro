@@ -7,6 +7,16 @@ pipeline in `../scripts/`. Everything here runs in a few seconds on a
 laptop CPU using the real `src/iss` library code (not a re-implementation),
 applied to three tiny synthetic dialogues instead of MathDial.
 
+Two equivalent ways to work through it:
+
+- **Notebook (recommended for first-time readers)**: [`ISS_Tutorial.ipynb`](ISS_Tutorial.ipynb) —
+  the same four steps below, but as a single narrated notebook with markdown
+  explanations tied directly to the manuscript's claims. Open with
+  `jupyter notebook tutorial/ISS_Tutorial.ipynb` or in any notebook-capable
+  editor (VS Code, JupyterLab, Cursor).
+- **Plain scripts (recommended for scripting/CI)**: the four numbered `.py`
+  files below, each runnable standalone from the command line.
+
 **What this tutorial is not**: it does not reproduce the paper's reported
 numbers (those require the real MathDial corpus, silver LLM labels, and a
 fine-tuned Qwen2.5-3B inverter/forward simulator — see the top-level
@@ -24,6 +34,16 @@ concrete and inspectable.
 | `04_misconception_ranking.py` | Reproduces, mechanically, the paper's central misconception caveat: a "label-prior" baseline that ignores the dialogue entirely can match a dialogue-aware prediction on F1@5/MRR when the gold active set is uniform across dialogues. |
 
 ## Run it
+
+**Notebook:**
+
+```bash
+jupyter notebook tutorial/ISS_Tutorial.ipynb
+# or, to execute headlessly and check for errors:
+jupyter nbconvert --to notebook --execute --inplace tutorial/ISS_Tutorial.ipynb
+```
+
+**Scripts:**
 
 ```bash
 cd tutorial
