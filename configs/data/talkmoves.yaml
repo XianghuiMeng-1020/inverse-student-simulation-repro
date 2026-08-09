@@ -1,0 +1,21 @@
+name: talkmoves
+source_url: https://aclanthology.org/2022.lrec-1.497.pdf
+license: public_subset
+raw_dir: ${paths.raw}/talkmoves
+processed_dir: ${paths.processed}/talkmoves
+splits_file: ${paths.splits}/talkmoves.json
+
+primary: false
+language: en
+subject: k12_math
+n_dialogues_expected: 567
+
+split_ratios:
+  train: 0.70
+  dev: 0.10
+  test: 0.20
+
+stratify_by: grade
+
+# We mine metacog signals only — NCTE full corpus is access-blocked
+use_for: [metacog_only, e6_transfer]

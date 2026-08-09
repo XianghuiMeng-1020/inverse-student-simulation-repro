@@ -1,0 +1,32 @@
+[
+  {
+    "dialogue_id": "toy_001",
+    "question": "A pizza is cut into 8 equal slices. Sam eats 3 slices. What fraction of the pizza did Sam eat?",
+    "turns": [
+      {"speaker": "tutor", "text": "How many slices did Sam eat, and how many slices make up the whole pizza?"},
+      {"speaker": "student", "text": "Sam ate 3 slices out of 8 total, so I think the fraction is 3/8."},
+      {"speaker": "tutor", "text": "That's right. Can you explain why the denominator is 8?"},
+      {"speaker": "student", "text": "Because the whole pizza was cut into 8 equal slices, so 8 is the total number of parts."}
+    ]
+  },
+  {
+    "dialogue_id": "toy_002",
+    "question": "Solve for x: 2x + 5 = 13.",
+    "turns": [
+      {"speaker": "tutor", "text": "What is the first step to isolate x?"},
+      {"speaker": "student", "text": "I'm not sure, this is confusing. Can I get a hint?"},
+      {"speaker": "tutor", "text": "Sure -- try subtracting 5 from both sides first."},
+      {"speaker": "student", "text": "OK so 2x = 8, and then x = 4? I think that's the same as dividing both sides by 2."}
+    ]
+  },
+  {
+    "dialogue_id": "toy_003",
+    "question": "Round 347 to the nearest ten.",
+    "turns": [
+      {"speaker": "tutor", "text": "Which digit tells you whether to round up or down?"},
+      {"speaker": "student", "text": "The ones digit is 7, so I round up. That makes it 350."},
+      {"speaker": "tutor", "text": "Good. What if the number were 342 instead?"},
+      {"speaker": "student", "text": "Then the ones digit is 2, so I round down to 340."}
+    ]
+  }
+]

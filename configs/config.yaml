@@ -1,0 +1,68 @@
+# ============================================================
+# Inverse Student Simulation — root Hydra config
+# ============================================================
+# Override at run time:
+#   uv run python scripts/train_inverter.py model=inverter_3b data=mathdial train=lora_default
+# ============================================================
+
+defaults:
+  - _self_
+  - data: mathdial
+  - model: inverter_3b
+  - train: lora_default
+  - eval: default
+  - override hydra/job_logging: default
+  - override hydra/hydra_logging: default
+
+# --- Project ---
+project:
+  name: inverse-student-sim
+  run_name: ${now:%Y%m%d_%H%M%S}_${model.backbone}_${data.name}
+  seed: 42
+
+# --- Paths ---
+paths:
+  root: ${hydra:runtime.cwd}
+  data: ${paths.root}/data
+  raw: ${paths.data}/raw
+  processed: ${paths.data}/processed
+  forward_sft: ${paths.data}/forward_sft
+  inverter_sft: ${paths.data}/inverter_sft
+  forward_sft_jsonl: ${paths.forward_sft}/mathdial_forward_train.jsonl
+  inverter_sft_jsonl: ${paths.inverter_sft}/mathdial_inverter_train.jsonl
+  synthetic: ${paths.data}/synthetic
+  splits: ${paths.data}/splits
+  experiments: ${paths.root}/experiments
+  checkpoints: ${paths.experiments}/checkpoints/${project.run_name}
+  results: ${paths.experiments}/results
+  hf_cache: ${oc.env:TRANSFORMERS_CACHE,${paths.root}/.hf_cache}
+
+# --- W&B ---
+wandb:
+  project: ${project.name}
+  entity: ${oc.env:WANDB_ENTITY,null}
+  mode: ${oc.env:WANDB_MODE,offline}
+  group: ${model.backbone}
+  tags:
+    - iss
+    - ${data.name}
+
+# --- Logging ---
+logging:
+  level: INFO
+  log_to_file: true
+  file: ${paths.experiments}/logs/${project.run_name}.log
+
+# --- Hydra meta ---
+hydra:
+  run:
+    dir: ${paths.experiments}/${project.run_name}
+  sweep:
+    dir: ${paths.experiments}/sweeps/${project.run_name}
+    subdir: ${hydra.job.num}
+  job:
+    chdir: false
+
+# --- Training pipeline caps (0 = no cap) ---
+pipeline:
+  max_train_records: 0

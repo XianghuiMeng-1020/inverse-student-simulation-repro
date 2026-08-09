@@ -1,0 +1,32 @@
+name: forward_3b
+backbone: Qwen/Qwen2.5-3B-Instruct
+tokenizer: ${model.backbone}
+dtype: bfloat16
+attn_implementation: sdpa
+trust_remote_code: false
+load_in_4bit: true   # QLoRA 4-bit to fit RTX 5090 32GB with LoRA r=16
+
+# LoRA config (separate from inverter)
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+  bias: none
+  task_type: CAUSAL_LM
+
+# Generation defaults
+generation:
+  max_new_tokens: 150
+  temperature: 0.7
+  top_p: 0.9
+  stop_sequences:
+    - "\n\nTutor:"
+    - "\n\nStudent:"
+
+max_input_tokens: 1024
+max_gpu_gb: 10

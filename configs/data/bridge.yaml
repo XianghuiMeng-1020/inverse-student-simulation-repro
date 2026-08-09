@@ -1,0 +1,25 @@
+name: bridge
+hf_id: rose-e-wang/bridge
+license: public
+raw_dir: ${paths.raw}/bridge
+processed_dir: ${paths.processed}/bridge
+splits_file: ${paths.splits}/bridge.json
+
+primary: false
+language: en
+subject: math
+n_dialogues_expected: 700
+
+split_ratios:
+  train: 0.70
+  dev: 0.10
+  test: 0.20
+
+stratify_by: error_type
+fields:
+  - c_h      # conversation history
+  - c_r      # original tutor response
+  - c_r_     # expert remediation
+  - e        # error type
+  - z_what   # remediation strategy
+  - z_why    # intention

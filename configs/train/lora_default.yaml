@@ -1,0 +1,36 @@
+name: lora_default
+
+epochs: 5
+batch_size: 4
+grad_accum_steps: 4           # effective batch 16
+lr: 2.0e-4
+lr_scheduler: cosine
+warmup_ratio: 0.03
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+precision: bf16
+gradient_checkpointing: true
+
+loss_weights:
+  l_kc: 1.0
+  l_misc: 1.0
+  l_metacog: 0.5
+  l_replay: 0.3
+  l_kl: 0.05
+
+eval_every_n_steps: 200
+save_every_n_steps: 100
+log_every_n_steps: 10
+
+early_stopping:
+  enabled: true
+  metric: dev/joint_score
+  patience: 3
+  mode: max
+
+dataloader_num_workers: 2
+seed: ${project.seed}
+
+# Cap GPU footprint so other jobs (e.g. forget.py) can share the same card.
+max_gpu_gb: 10

@@ -1,0 +1,23 @@
+name: synthetic
+generator: forward_simulator
+license: mit
+raw_dir: ${paths.synthetic}
+processed_dir: ${paths.processed}/synthetic
+
+primary: false
+language: en
+subject: math
+
+n_dialogues: 5000
+turns_per_dialogue:
+  min: 4
+  max: 32
+
+# Sample Z* from priors, run forward simulator, persist (D, Z*)
+sampling:
+  m_prior: beta_2_2
+  c_prior: bernoulli_per_misconception
+  c_active_prob: 0.3
+  g_prior: gaussian
+
+use_for: [identifiability_e3, training_aux]

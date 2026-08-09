@@ -1,0 +1,73 @@
+{
+  "_description": "Verification targets only. These are the final numbers reported in the manuscript (MathDial test set, n=394 unless noted). They are NOT hard-coded into any reproduction script; regenerate them via scripts/generate_paper_tables.py and scripts/run_replay_statistics.py and compare.",
+  "_source": "paper tables e1_main, e1_extended_metrics, e3_identifiability, e4_replay, e4_oracle, e4_ctx_dropout, e5_human, e7_bridge",
+
+  "kc_mastery": {
+    "kc_brier_iss_seed_mean_Tfull": 0.038,
+    "kc_brier_iss_seed_std_Tfull": 0.002,
+    "kc_brier_bkt_baseline": 0.071,
+    "kc_brier_pseudo_z_label_prior": 0.028,
+    "kc_brier_gpt4o_zeroshot": 0.034,
+    "kc_auc_pooled_cross_dialogue": 0.506,
+    "kc_auc_pooled_std": 0.008,
+    "kc_auc_gpt4o_zeroshot": 0.505,
+    "kc_ece_seed42_Tfull": 0.090,
+    "kc_spearman_within_dialogue": 0.274,
+    "kc_spearman_within_dialogue_sd": 0.280,
+    "kc_spearman_n_dialogues": 376,
+    "kc_top3_overlap_pct": 40.7,
+    "kc_top3_chance_pct": 33.0,
+    "corpus_kc_std_silver_v3": 0.171
+  },
+
+  "misconceptions": {
+    "misconception_f1_at_5_iss": 1.0,
+    "misconception_f1_at_5_label_prior_baseline": 0.889,
+    "misconception_mrr_at_10_iss": 1.0,
+    "note": "Near-perfect ranking is a structural artifact of silver v3 label uniformity (all 394 test dialogues share the same 4-code active set M001-M004 @ p=0.35). See manuscript 'Misconception sparsity caveat'."
+  },
+
+  "metacognition": {
+    "metacog_pearson_r_mean_Tfull": 0.082,
+    "metacog_pearson_r_std_Tfull": 0.068,
+    "note": "Exploratory facet; scalars are derived from silver annotation ratios, not observable discrete behaviors."
+  },
+
+  "identifiability_e3": {
+    "entropy_min": 0.630,
+    "entropy_max": 0.638,
+    "note": "Mean Bernoulli entropy of inverter-predicted KC mastery vs. prefix length T; remains nearly flat."
+  },
+
+  "forward_replay_e4a_context_conditioned": {
+    "delta_nll_silver_vs_random_h1": -0.006,
+    "wilcoxon_p_h1": 0.003,
+    "cohens_d_h1": -0.71,
+    "n_anchor_points": 51
+  },
+  "forward_replay_e4b_zonly_oracle": {
+    "wilcoxon_p_h1": 0.015,
+    "cohens_d_h1": -0.54,
+    "wilcoxon_p_h3": 0.014,
+    "cohens_d_h3": -0.74
+  },
+  "forward_replay_e4c_context_dropout": {
+    "delta_nll_silver_vs_random": -0.005,
+    "wilcoxon_p": 0.232,
+    "cohens_d": -0.21
+  },
+
+  "label_agreement_e5": {
+    "api_dual_rater_kappa": 0.054,
+    "api_dual_rater_kc_mae": 0.146,
+    "api_dual_rater_n": 25,
+    "silver_v3_vs_v2_kappa": 0.13,
+    "silver_v3_vs_v2_mae": 0.13,
+    "silver_v3_vs_v2_n": 24
+  },
+
+  "bridge_e7_zeroshot_probe": {
+    "exact_match_accuracy": 0.044,
+    "n_dialogues": 68
+  }
+}

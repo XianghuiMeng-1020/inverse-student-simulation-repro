@@ -1,0 +1,14 @@
+name: eedi
+source: kaggle_neurips_2020_education_challenge
+license: competition
+raw_dir: ${paths.raw}/eedi
+processed_dir: ${paths.processed}/eedi
+
+primary: false
+language: en
+subject: math
+has_dialogue: false
+
+# Eedi has MCQ + misconception labels but no dialogues — used as auxiliary
+# misconception ground-truth signal only
+use_for: [misconception_auxiliary]

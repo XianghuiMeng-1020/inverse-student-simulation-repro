@@ -1,0 +1,48 @@
+name: inverter_3b
+backbone: Qwen/Qwen2.5-3B-Instruct
+tokenizer: ${model.backbone}
+dtype: bfloat16
+attn_implementation: sdpa
+load_in_4bit: true   # QLoRA 4-bit to fit RTX 5090 32GB
+trust_remote_code: false
+
+# LoRA config
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+  bias: none
+  task_type: CAUSAL_LM
+
+# Heads
+heads:
+  mastery:
+    type: beta
+    n_kc: 30                # Bridge taxonomy size
+  misconception:
+    type: multilabel
+    n_classes: 70           # MathDial + Eedi combined catalogue
+    use_retrieval_rerank: true
+  metacog:
+    type: regression
+    features:
+      - monitoring_accuracy
+      - help_seeking_ratio
+      - confidence_correctness_gap
+      - hint_uptake
+
+# Structured output
+structured_output:
+  enabled: true
+  grammar: outlines           # outlines on Windows; xgrammar on Linux/WSL2
+  schema_path: ${paths.root}/src/iss/schema/latent_schema.json
+
+# Context handling
+max_input_tokens: 1024
+max_output_tokens: 512
+max_gpu_gb: 8

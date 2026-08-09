@@ -1,0 +1,18 @@
+name: mathdial
+hf_id: eth-nlped/mathdial
+license: cc-by-4.0
+raw_dir: ${paths.raw}/mathdial
+processed_dir: ${paths.processed}/mathdial
+splits_file: ${paths.splits}/mathdial.json
+
+primary: true
+language: en
+subject: math
+n_dialogues_expected: 2861
+
+split_ratios:
+  train: 0.70
+  dev: 0.10
+  test: 0.20
+
+stratify_by: kc_coverage

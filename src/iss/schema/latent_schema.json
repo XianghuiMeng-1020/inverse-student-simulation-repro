@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "MasteryVector": {
+      "description": "``m ∈ [0,1]^{30}`` keyed by canonical KC ids.",
+      "properties": {
+        "values": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "values"
+      ],
+      "title": "MasteryVector",
+      "type": "object"
+    },
+    "MetacogProfile": {
+      "description": "Four-dimensional metacognitive gap vector ``g``.",
+      "properties": {
+        "monitoring_accuracy": {
+          "description": "Proxy for calibration of self-assessment vs eventual correctness. Operationalization (coding manual): from student turns expressing certainty/hedging compared against final answer correctness over the dialogue span; labelers map to [0,1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Monitoring Accuracy",
+          "type": "number"
+        },
+        "help_seeking_ratio": {
+          "description": "#(explicit help/hint requests or 'I don't know') / #(tutor prompts that afford a student attempt). Higher means more reliance on external scaffolding.",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Help Seeking Ratio",
+          "type": "number"
+        },
+        "confidence_correctness_gap": {
+          "description": "Mean student-stated confidence (mapped to [0,1]) minus mean correctness indicator on attempts (mapped to [0,1]). Positive means overconfidence; negative means underconfidence.",
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "title": "Confidence Correctness Gap",
+          "type": "number"
+        },
+        "hint_uptake": {
+          "description": "Overlap between tutor hint content and subsequent student turn, operationalized via token overlap / embedding cosine after stopword removal; normalized to [0,1].",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Hint Uptake",
+          "type": "number"
+        }
+      },
+      "required": [
+        "monitoring_accuracy",
+        "help_seeking_ratio",
+        "confidence_correctness_gap",
+        "hint_uptake"
+      ],
+      "title": "MetacogProfile",
+      "type": "object"
+    },
+    "MisconceptionState": {
+      "description": "Multi-hot (soft) misconception vector over |M|=70.",
+      "properties": {
+        "probs": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Probs",
+          "type": "object"
+        }
+      },
+      "required": [
+        "probs"
+      ],
+      "title": "MisconceptionState",
+      "type": "object"
+    }
+  },
+  "description": "Joint latent ``Z = (m, C, g)`` plus optional rationale string.",
+  "properties": {
+    "mastery": {
+      "$ref": "#/$defs/MasteryVector"
+    },
+    "misconceptions": {
+      "$ref": "#/$defs/MisconceptionState"
+    },
+    "metacog": {
+      "$ref": "#/$defs/MetacogProfile"
+    },
+    "rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Optional short natural-language rationale for debugging / qual analysis.",
+      "title": "Rationale"
+    }
+  },
+  "required": [
+    "mastery",
+    "misconceptions",
+    "metacog"
+  ],
+  "title": "LatentZ",
+  "type": "object"
+}

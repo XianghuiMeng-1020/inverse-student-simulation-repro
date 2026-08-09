@@ -1,0 +1,1 @@
+"""Joint inverter (dialogue -> ``LatentZ``)."""

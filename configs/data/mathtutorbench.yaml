@@ -1,0 +1,22 @@
+name: mathtutorbench
+github: eth-lre/mathtutorbench
+source_paper: aclanthology.org/2025.emnlp-main.11
+license: public
+raw_dir: ${paths.raw}/mathtutorbench
+
+primary: false
+language: en
+subject: math
+
+# Used as evaluation surface for E8 downstream tutor benefit + auxiliary
+# validation for misconception head (mistake-location, mistake-correction)
+use_for: [e8_downstream, misconception_validation]
+
+tasks:
+  - problem_solving
+  - socratic_questioning
+  - student_solution_correctness
+  - mistake_location
+  - mistake_correction
+  - scaffolding_generation
+  - pedagogy_following
